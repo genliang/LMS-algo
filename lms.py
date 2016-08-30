@@ -12,21 +12,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-alpha = [0.1, 0.01, 0.001]
-Emax = 10000000000000000000000000
-i = 0
-maxIter = 500
-E = 0
-w = []
+
+#weight_vector = np.zeros(3)
 #w = np.array([0.1, 0.1, 0.1]) #25 weights
 
 error_grp = []
 iter_grp = []
 #initialise the training patterns
-training = [[np.array([-1.5, 2.0, 1.3]).transpose(), 0.5], [np.array([2.3, 1.2, 5.3]).transpose(), 1.2], [np.array([0.5, -1.2, -0.8]).transpose(), -0.8], 
-            [np.array([-0.8, 1.0, 1.2]).transpose(), 0.5], [np.array([1.0, -0.8, -1.2]).transpose(), 0.5]]
+training = [[np.array([-0.5, 1.2, -0.1]).transpose(), 0.2], [np.array([0.7, -0.5, -0.2]).transpose(), -0.8], [np.array([0.3, 1.2, 2.3]).transpose(), 0.8], 
+            [np.array([1.2, 0.8, 1.0]).transpose(), 0.4], [np.array([-0.5, 1.2, -0.1]).transpose(), -0.2],
+            [np.array([1.0, -0.3, 0.5]).transpose(), -0.1]]
 
 def lms(w): 
+  i = 0
+  alpha = [0.1, 0.01, 0.001]
+  Emax = 10000000000000000000000000
+  maxIter = 500
+  E = 0
   while ((i < maxIter) and (E < Emax)):
     E = 0
     for pair in training:
@@ -47,10 +49,16 @@ def lms(w):
   print('Final error: ' + str(E))
   print('final weight: ' + str(w))
 
-for range(25):
-  for range(3):
-    w.append(round(random.random(), 1)) 
-  lms(w)
+w = []
+for x in range(25):
+  for y in range(3):
+    val = round(random.random(), 1)
+    print(val)
+    w.append(val)
+  weight_vector = np.array(w)
+  print('Weight vector: ' + str(weight_vector))
+  lms(weight_vector)
+  w = []
 
 
 
